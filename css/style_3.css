@@ -1,0 +1,44 @@
+header {
+    background-color: #666666;
+}
+
+h1 {
+    margin: 0;
+    padding: 2%;
+    color: white;
+}
+
+div {
+    overflow: hidden;
+    padding-bottom: .1%;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
+div h2{
+    float: left;
+    margin: 0 1% 0 0;
+    padding: 3.5% 2%;
+    background-color: #cccccc;
+}
+
+div h3,
+div p {
+    margin: .4% 0 0 0;
+    line-height: 1.5;
+}
+
+h3 {
+    font-size: 1em;
+}
+
+.float h3 {
+    float: left;
+}
+
+.float p {
+    float: left;
+    margin-left: 1%;
+    margin-right: 3%;
+}

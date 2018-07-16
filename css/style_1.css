@@ -1,0 +1,22 @@
+body {
+    padding-left: 2%;
+    border: 1px solid #f0f0f0;
+}
+
+div {
+    overflow: hidden;
+}
+
+.float h3 {
+    float: left;
+}
+
+.float p {
+    float: left;
+    margin-left: 1%;
+    margin-right: 3%;
+}
+
+h3 {
+    font-size: 1em;
+}
