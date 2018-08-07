@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复杂页面实现</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="nav">
+        <div class="item">
+            <img src="img/Item 1.png" alt="message" class="item1" />
+            <img src="img/Item 2.png" alt="something" class="item2" />
+            <img src="img/Item 3.png" alt="game" class="item3" />
+            <span class="item4">&#43;</span>
+            <span class="active"></span>
+        </div>
+        <div class="nav-bottom">
+            <img src="img/Grid.png" alt="grid" class="grid"/>
+            <img src="img/Settings.png" alt="setting"  class="setting"/>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="menu">
+            <h2>MENU</h2>
+            <img src="img/Settings.png" alt="setting" />
+            <p>Overview</p>
+            <p>Sales <span class="info">54</span></p>
+            <p>Your Staff</p>
+            <p>Analytics & Targeting</p>
+            <p>What's New</p>
+        </div>
+        <div class="product">
+            <h2>YOUR PRODUCTS</h2>
+            <img src="img/Settings.png" alt="setting" />
+            <p class="book">Books</p>
+            <p class="tutorials">Tutorials</p>
+            <p class="stocks">Stocks</p>
+            <p class="infographics">Infographics</p>
+        </div>
+        <div class="dashboard">
+            <h2>DASHBOARD</h2>
+            <img src="img/Settings.png" alt="setting" />
+            <p><span class="active"></span> Messages <span class="info">21</span></p>
+            <p>Connections</p>
+            <p>Integrations <span class="warning">&#33;</span></p>
+            <p>Account Settings</p>
+            <p>App Settings</p>
+        </div>
+        <img src="img/goal.png" alt="goal" class="goal"/>
+    </div>
+    <div class="message">
+        <div class="title">
+            <h1>Messages</h1>
+            <div class="self-info">
+                <img src="img/photo.png" alt="photo" />
+                <h2>Jordan J.</h2>
+                <p>Administrator</p>
+                <span class="arrow"></span>
+            </div>
+        </div>
+        <div class="message-left">
+            <div class="search">
+                <input type="text" name="search" placeholder="Search" />
+            </div>
+            <div class="preview-wrap">
+                <div class="preview preview-active">
+                    <div class="person-info">
+                        <img src="img/person01.png" alt="head portrait" />
+                        <h2><span class="active"></span>Bessie Berry</h2>
+                        <p>Twitter</p>
+                        <span class="time">3m</span>
+                    </div>
+                    <div class="message-preview">
+                        <span class="info">4</span>
+                        <p>I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable...</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person02.png" alt="head portrait" />
+                        <h2>Victor Weber</h2>
+                        <p>Adobe</p>
+                        <span class="time">8m</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>I shared this on my fb wall a few months back, and I thought I'd share it here again because it's such a great...</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person03.png" alt="head portrait" />
+                        <h2>Dustin Benson</h2>
+                        <p>Facebook</p>
+                        <span class="time">Yesterday</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>If there is anyone who needs an invitation please add yourself in the comments of this port!</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person04.png" alt="head portrait" />
+                        <h2>Jack Mason</h2>
+                        <p>Yahoo</p>
+                        <span class="time">Yesterday</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>BruteDC is a peer-to-peer movie+tv series sharing and downloading platform which works on intranet inside...</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person05.png" alt="head portrait" />
+                        <h2>Stephen Shelton</h2>
+                        <p>Snapchat</p>
+                        <span class="time">13 Jun</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>Yes, p2p traffic is often filtered (QoSed). Although i do use BT on O2 wires, and in good days dl speed...</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person06.png" alt="head portrait" />
+                        <h2>Sally Willis</h2>
+                        <p>Twitter</p>
+                        <span class="time">12 Jun</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>Yes, it's O2: 'internet extreme', which is no longer offered.</p>
+                    </div>
+                </div>
+                <div class="preview">
+                    <div class="person-info">
+                        <img src="img/person07.png" alt="head portrait" />
+                        <h2>Robert Patton</h2>
+                        <p>A Team</p>
+                        <span class="time">9 Jun</span>
+                    </div>
+                    <div class="message-preview">
+                        <p>I change my service from this 4Mb plan to their much cheaper 8Mb plan, my speed will dramatically decrease.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="message-right">
+            <div class="message-title">
+                <h2>Bessie Berry <span class="green"></span> </h2>
+                <div class="button">
+                    <button><img src="img/User icon.png" alt="user" /></button>
+                    <button><img src="img/Upload icon.png" alt="upload" /></button>
+                    <button><img src="img/Trash icon.png" alt="trash" /></button>
+                </div>
+                <div class="arrow-button">
+                    <p>1 of 28</p>
+                    <button><img src="img/Arrow right.png" alt="arrow right" /></button>
+                    <button><img src="img/Arrow left.png" alt="arrow left" /></button>
+                </div>
+            </div>
+            <div class="message-content">
+                <div class="monday">
+                    <div class="content">
+                        <div class="content-left">
+                             <img src="img/person01.png" alt="head portrait" />
+                        </div>
+                        <div class="content-right">
+                            <h2>Bessie Berry <span>8:31 AM</span> </h2>
+                            <p>Hi guys Ive got the O2 package and have really slow internet. A speed check online said i can get 3mbps but it seems more like 0.5 these days, just freezing and taking ages to open pages and open audio files for example. I have decided to switch to the UPC package which offers 10mbps but do you think i will get it?</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="content-left">
+                            <img src="img/person08.png" alt="head portrait" />
+                        </div>
+                        <div class="content-right">
+                            <h2>Jordan Jackson <span>8:31 AM</span> </h2>
+                            <p>I have internet for 9 month and nevere could benefit from the full capacity of 5Mbit/s as it is filtered by O2 when it detect traffic on public p2p sharing in my situation all my internet speed slows to 521Kbit/s. I never had 400KB/s on when downloading from p2p pblic servers like torrent emule etc. I downoad with 500KB/s from private trakers instead. So conlcusion O2 block trafic on p2p connections. I have made hundreds of test in italy and Sweden and Romania with the same file to doanload with the same setting and same antivirus and just needed to open ports in firewall and forward same ports and the speed was at full capacity in 1minute here in 9 month never had this luck.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tuesday">
+                    <p class="date">Tuesday</p>
+                    <div class="content">
+                        <div class="content-left">
+                                <img src="img/person01.png" alt="head portrait" />
+                        </div>
+                        <div class="content-right">
+                            <h2>Bessie Berry <span>8:31 AM</span> </h2>
+                            <p>Funny comparison. so would the proper antivirus not slow down the internet as much or do you mean a freebie doenst protect the computer from viruses?</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="content-left">
+                            <img src="img/person08.png" alt="head portrait" />
+                        </div>
+                        <div class="content-right">
+                            <h2>Jordan Jackson <span>8:31 AM</span> </h2>
+                            <p>I pay for the 4Mb/sec down, 512 Kb/sec up service from O2, and haven't had any problems. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. I max out at about 3 Mb/sec down, and 350 Kb/sec up. Probably because of a nolsy telephone line, not because I'm being throttled. When my uploads go over 25KB/sec (note, bytes, not bits), my download speed suffers. This is expected, as downloads require upload bandwidth as well.</p>
+                            <div class="photo">
+                                <img src="img/Photo01.png" alt="photo" />
+                            </div>
+                            <div class="photo">
+                                <img src="img/Photo02.png" alt="photo" />
+                                <div class="photo-open">
+                                    <img src="img/Open icon.png" alt="open" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="new">
+                    <p class="new-date">New Messages</p>
+                    <div class="content">
+                        <div class="content-left">
+                                <img src="img/person01.png" alt="head portrait" />
+                        </div>
+                        <div class="content-right">
+                            <h2>Bessie Berry <span>8:31 AM</span> </h2>
+                            <p>I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input">
+                    <button>&#43;</button>
+                    <input type="text" name="message" id="message" placeholder="Please enter the content"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
