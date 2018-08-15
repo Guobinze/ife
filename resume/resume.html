@@ -54,6 +54,13 @@
     </main>
     <script >
         console.log("Hello,欢迎查看我的简历，希望我们共同进步")
+        var time = new Date().getHours();
+        console.log(time);
+        if (time > 4 && time < 20) {
+            alert("早上好");
+        }else {
+            alert("晚上好");
+        }
     </script>
 </body>
 </html>
