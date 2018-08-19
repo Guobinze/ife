@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="name" type="text" onkeypress="onKey()">    
+    <button id="submit-btn">Submit</button>
+
+    <script>
+        var button = document.getElementById("submit-btn");
+        button.onclick = function () {
+            var value = document.getElementById("name").value;
+            console.log(value);
+        }
+
+        function onKey() {
+            if (event.keyCode == 13) {
+                button.onclick();
+            }
+
+            if (event.keyCode == 27) {
+                var name = document.getElementById("name");
+                name.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+    <style>
+        div {
+            margin:  0 auto;
+            width: 480px;
+            height: 480px;
+            background-image: url("http://ife.baidu.com/2016/static/img/erik_ce204002.jpg");
+        }
+    </style>
+</head>
+<body>            
+    <div id="animation"></div>
+    <script>
+        var y = 0;
+
+        function animation() {
+            document.getElementById("animation").style.backgroundPositionY = "-" + y + "px";
+            
+            if (y == 8160) {
+                y = 0;
+            }else {
+                y += 480;
+            }
+        }
+
+        setInterval(animation,100);
+    </script>
+</body>
+</html>
