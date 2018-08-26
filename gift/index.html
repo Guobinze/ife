@@ -18,7 +18,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background-image: url(1.jpg);
+            background-image: url(img/background.jpg);
             background-repeat: no-repeat;
             background-size: 100%;
             overflow: hidden;
@@ -34,21 +34,28 @@
         p {
             margin-top: 1%;
             font-size: 20px;
+            font-weight: 300;
             text-align: center;
+        }
+
+        span {
+            font-weight: 500;
         }
 
         #girl {
             position: absolute;
             top: 25%;
-            left: 50%;
+            left: 35%;
             transform: translateX(-50%);
             width: 30%;
+            box-shadow: 10px 10px 5px black;
+            transform:rotateZ(3deg);
         }
 
         #flower {
             position: absolute;
             right: 5%;
-            bottom: -5%;
+            bottom: -8%;
             width: 20%;
             transform:rotateZ(-70deg);
         }
@@ -87,9 +94,9 @@
             <select id="second-select"></select>
         </div>
         <p id="result-wrapper"></p>
-        <img id="girl" src="girl.jpeg" />
-        <img id="flower" src="flower.png" />
-        <img id="air" src="air.png" alt="">
+        <img id="girl" src="img/girl.jpeg" />
+        <img id="flower" src="img/flower.png" />
+        <img id="air" src="img/air.png" alt="">
     </div>
 
     <script>
@@ -237,7 +244,7 @@
                 g = Math.floor(Math.random()*255);
                 b = Math.floor(Math.random()*255);
                 c = 'rgb('+ r +','+ g +','+ b +')';
-            document.querySelector("span").style.color = c;
+            document.querySelector(".color").style.color = c;
         }
     
         function getD() {
@@ -274,9 +281,9 @@
                 second = Math.floor(k / 1000);
     
                 if (yearsel == 1994 && monthsel == 7 && daysel == 31) {
-                    result.innerHTML = "现在距离" + "&nbsp;" + "<span>阚佳琪大美女</span>" + "的生日" + "&nbsp;" +  yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "已经过去" + day + "天" + hour + "小时" + minute + "分" + second + "秒";
+                    result.innerHTML = "现在距离" + "&nbsp;" + "<span class='color'>萌琪琪</span>" + "&nbsp;" + "的生日" + "&nbsp;" + "<span>" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "</span>" + "&nbsp;" + "已经过去" + "<span>" + day + "天" + hour + "小时" + minute + "分" + second + "秒" + "</span>";
                 }else {
-                    result.innerHTML = "现在距离" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "已经过去" + day + "天" + hour + "小时" + minute + "分" + second + "秒";
+                    result.innerHTML = "现在距离" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "已经过去" + "<span>" + day + "天" + hour + "小时" + minute + "分" + second + "秒" + "</span>" ;
                 }
                 
                 
@@ -294,7 +301,7 @@
                 k = j % (60 * 1000);
                 second = Math.floor(k / 1000);
                 
-                result.innerHTML = "现在距离" + "&nbsp;" + "你所期待的日子" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "还有" + day + "天" + hour + "小时" + minute + "分" + second + "秒";
+                result.innerHTML = "现在距离" + "&nbsp;" + "你所期待的日子" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "还有" + "<span>" + day + "天" + hour + "小时" + minute + "分" + second + "秒" + "</span>" ;
             }
         }
     
