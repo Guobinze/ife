@@ -1,0 +1,68 @@
+<p id="date-one"></p>
+<p id="date-two"></p>
+
+<script>
+    var p1 = document.getElementById("date-one"),
+        p2 = document.getElementById("date-two");
+
+    function getWeek() {
+        var myDate = new Date();
+        var weekday = {
+            "0" : "Sunday",
+            "1" : "Monday",
+            "2" : "Tuesday",
+            "3" : "Wednesday",
+            "4" : "Thursday",
+            "5" : "Friday",
+            "6" : "Saturday"
+        };
+        return weekday[myDate.getDay()];
+    }
+
+    function appendZero(time) {
+        if (time < 10) {
+            return "0" + time;
+        }else {
+            return time;
+        }
+    }
+
+    function getT(time) {
+        if ( time < 12) {
+            return "AM";
+        }else {
+            return "PM";
+        }
+    }
+
+    function getD1() {
+        var myDate = new Date(),
+              year = myDate.getFullYear(),
+             month = myDate.getMonth(),
+              date = myDate.getDate(),
+             hours = myDate.getHours(),
+           minutes = myDate.getMinutes(),
+           seconds = myDate.getSeconds();
+
+        var date = year + "年" + appendZero(month+1) + "月" + appendZero(date) + "日" + "&nbsp;" + getWeek() + "&nbsp;" + appendZero(hours) + "&#58;" + appendZero(minutes) + "&#58;" + appendZero(seconds);     
+        return date;
+    }
+
+    function getD2() {
+        var myDate = new Date(),
+              year = myDate.getFullYear(),
+             month = myDate.getMonth(),
+              date = myDate.getDate(),
+             hours = myDate.getHours(),
+           minutes = myDate.getMinutes(),
+           seconds = myDate.getSeconds();
+
+        var date = year + "&#45;" + appendZero(month+1) + "&#45;" + appendZero(date) + "&nbsp;" + getWeek() + "&nbsp;" + appendZero(hours) + "&#58;" + appendZero(minutes) + "&#58;" + appendZero(seconds) + "&nbsp;" + getT(hours);     
+        return date;
+    }
+    
+    setInterval(function () {
+        p1.innerHTML = getD1();
+        p2.innerHTML = getD2();
+    },1000);
+</script>

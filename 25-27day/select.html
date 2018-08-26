@@ -1,0 +1,200 @@
+<select id="year-select"></select>
+
+<select id="month-select"></select>
+
+<select id="day-select"></select>
+
+<select id="hour-select"></select>
+
+<select id="minute-select"></select>
+
+<select id="second-select"></select>
+
+<p id="result-wrapper"></p>
+
+<script>
+    function appendZero(time) {
+        if (time < 10) {
+            return "0" + time;
+        }else {
+            return time;
+        }
+    }
+
+    function appendOption(sel,day) {
+        var select = sel,
+            option = document.createElement("option"),
+            text;
+  
+        if (select.id == "hour-select" || select.id == "minute-select" || select.id == "second-select") {
+            text = document.createTextNode(appendZero(day));
+ 
+        }else {
+            text = document.createTextNode(day);
+        }
+        option.appendChild(text);
+        option.value = day;
+        select.appendChild(option);
+    }
+
+    function removeOption(sel) {
+        var select = document.getElementById("day-select");
+        for (var i = select.length - 1; i >= 0; i--) {
+            select.remove(select.length-1);
+        }
+    }
+
+    function yearSelect() {
+        var select = document.getElementById("year-select");
+        for (var i = 2000; i <= 2032; i++) {
+            appendOption(select,i);
+        }
+    }
+
+    function monthSelect() {
+        var select = document.getElementById("month-select");
+        for (var i = 1; i <= 12; i++) {
+            appendOption(select,i);
+        }
+    }
+
+    function daySelect() {
+        var select = document.getElementById("day-select"),
+            month = document.getElementById("month-select"),
+            index = month[month.selectedIndex].value;
+
+        removeOption();
+ 
+        if (index == 1 || index == 3 || index == 5 || index == 7 || index == 8 || index == 10 || index == 12) {
+            for (var i = 1; i <= 31; i++) {
+                appendOption(select,i);
+            }
+        }
+
+        if (index == 4 || index == 6 || index == 9 || index == 11) {
+            for (var i = 1; i <= 30; i++) {
+                appendOption(select,i);
+            }
+        }
+
+        if (index == 2) {
+            var year = document.getElementById("year-select"),
+                yearIndex = year[year.selectedIndex].value;
+
+            if ((yearIndex%4 == 0 && yearIndex%100 != 0) || yearIndex%400 == 0) {
+                for (var i = 1; i <= 29; i++) {
+                    appendOption(select,i);
+                }
+            }else {
+                for (var i = 1; i <= 28; i++) {
+                    appendOption(select,i);
+                }
+            }
+        }
+    }
+    
+    function hourSelect() {
+        var select = document.getElementById("hour-select");
+        for (var i = 0; i <= 23; i++) {
+            appendOption(select,i);
+        }
+    }
+
+    function minuteSelect() {
+        var select = document.getElementById("minute-select");
+        for (var i = 0; i <= 59; i++) {
+            appendOption(select,i);
+        }
+    }
+
+    function secondSelect() {
+        var select = document.getElementById("second-select");
+        for (var i = 0; i <= 59; i++) {
+            appendOption(select,i);
+        }
+    }
+
+    yearSelect();
+    monthSelect();
+    daySelect();
+    hourSelect();
+    minuteSelect();
+    secondSelect();
+
+    document.getElementById("year-select").addEventListener("change",daySelect);
+    document.getElementById("month-select").addEventListener("change",daySelect);
+
+    function getWeek(date) {
+        var myDate = date;
+        var weekday = {
+            "0" : "星期日",
+            "1" : "星期一",
+            "2" : "星期二",
+            "3" : "星期三",
+            "4" : "星期四",
+            "5" : "星期五",
+            "6" : "星期六"
+        };
+        return weekday[myDate.getDay()];
+    }
+
+    function getD() {
+        var now = new Date(),
+            yearsel = document.getElementById("year-select").value,
+            monthsel = document.getElementById("month-select").value,
+            daysel = document.getElementById("day-select").value,
+            hoursel = document.getElementById("hour-select").value,
+            minutesel = document.getElementById("minute-select").value,
+            secondsel = document.getElementById("second-select").value,
+            date = new Date(yearsel,monthsel,daysel,hoursel,minutesel,secondsel),
+            result = document.getElementById("result-wrapper"),
+            time,
+            day,
+            hour,
+            minute,
+            second,
+            i,
+            j,
+            k;
+        
+        if (now.getTime() >= date.getTime()) {
+            time = now.getTime() - date.getTime();
+
+            day = Math.floor(time / (24 * 60 * 60 * 1000));
+
+            i = time % (24 * 60 * 60 * 1000);
+            hour = Math.floor(i / (60 * 60 * 1000));
+
+            j = i % (60 * 60 * 1000);
+            minute = Math.floor(j / (60 * 1000));
+
+            k = j % (60 * 1000);
+            second = Math.floor(k / 1000);
+            
+            result.innerHTML = "现在距离" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "已经过去" + day + "天" + hour + "小时" + minute + "分" + second + "秒";
+        }else {
+            time = date.getTime() - now.getTime();
+
+            day = Math.floor(time / (24 * 60 * 60 * 1000));
+
+            i = time % (24 * 60 * 60 * 1000);
+            hour = Math.floor(i / (60 * 60 * 1000));
+
+            j = i % (60 * 60 * 1000);
+            minute = Math.floor(j / (60 * 1000));
+
+            k = j % (60 * 1000);
+            second = Math.floor(k / 1000);
+            
+            result.innerHTML = "现在距离" + "&nbsp;" + yearsel + "年" + monthsel + "月" + daysel + "日" + getWeek(date) + "&nbsp;" + appendZero(hoursel) + "&#58;" + appendZero(minutesel) + "&#58;" + appendZero(secondsel) + "&nbsp;" + "还有" + day + "天" + hour + "小时" + minute + "分" + second + "秒";
+        }
+    }
+
+    getD();
+
+    setInterval(getD,1000);
+
+    for (var i = 0; i < document.querySelectorAll("select").length; i++) {
+        document.querySelectorAll("select")[i].onchange = getD;
+    }
+</script>

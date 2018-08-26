@@ -1,0 +1,44 @@
+<p></p>
+
+<script>
+    var p = document.querySelector("p");
+
+    function getWeek() {
+        var myDate = new Date();
+        var weekday = {
+            "0" : "星期日",
+            "1" : "星期一",
+            "2" : "星期二",
+            "3" : "星期三",
+            "4" : "星期四",
+            "5" : "星期五",
+            "6" : "星期六"
+        };
+        return weekday[myDate.getDay()];
+    }
+
+    function appendZero(time) {
+        if (time < 10) {
+            return "0" + time;
+        }else {
+            return time;
+        }
+    }
+
+    function getD() {
+        var myDate = new Date(),
+              year = myDate.getFullYear(),
+             month = myDate.getMonth(),
+              date = myDate.getDate(),
+             hours = myDate.getHours(),
+           minutes = myDate.getMinutes(),
+           seconds = myDate.getSeconds();
+
+        var date = year + "年" + appendZero(month+1) + "月" + appendZero(date) + "日" + "&nbsp;" + getWeek() + "&nbsp;" + appendZero(hours) + "&#58;" + appendZero(minutes) + "&#58;" + appendZero(seconds);     
+        return date;
+    }
+    
+    setInterval(function () {
+        p.innerHTML = getD();
+    },1000);
+</script>
