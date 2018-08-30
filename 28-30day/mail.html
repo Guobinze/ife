@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>给爱的人发个邮件吧</title>
+    <style>
+        .wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 200px;
+            height: 30px;
+            border: 1px solid #818181;
+            outline: none;
+        }
+
+        ul {
+            display: none;
+            margin: 0;
+            padding: 0;
+            width: 203px;
+            border: 1px solid #818181;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        li {
+            padding: 5%;
+            color: #818181;
+        }
+
+        li:hover {
+            background-color: rgb(197, 221, 235);
+        }
+
+        .select {
+            background-color: rgb(247, 199, 208);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+
+    <script>
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        var input = document.getElementById("email-input");
+        var ul = document.getElementById("email-sug-wrapper");
+        var nowSelectTipIndex = 0;
+        
+        input.oninput = function(e) {
+
+            if (e.keyCode != 38 || e.keyCode != 40 || e.keyCode != 13) {
+                removeSelect();
+            }
+            
+            append();
+            controlSug();
+        }
+
+        input.onkeydown = onKey;
+
+        ul.onclick = function (e) {
+            if (e.target.nodeName.toLowerCase() == "li") {
+                var text = decode(e.target.innerHTML);
+                input.value = text;
+                hide();
+            }
+
+            input.focus();
+        }
+
+        function getInput() {
+            var value = input.value;
+
+            for (var i = 0; i < value.length; i++){
+                if (value[0] == " " || value[0] == "　") {
+                    value = value.slice(1);
+                }else if (value[value.length-1] == " " || value[value.length-1] == "　") {
+                    value = value.slice(0,value.length-2);
+                }
+            }
+            return value;
+        }
+ 
+        function create() {
+            var content = encode(getInput()),
+                list = new Array(),
+                index = content.indexOf("@"),
+                li,
+                node,
+                addr,
+                mail;
+
+            if (index != -1) {
+                addr = content.slice(0,index);
+                mail = content.slice(index+1);
+                
+            }else {
+                addr = content;
+            }
+
+            for (var i = 0; i < postfixList.length; i++) {
+
+                if (postfixList[i].indexOf(mail) != -1 && postfixList[i].indexOf(mail) == 0 && mail != "") {
+                    li = document.createElement("li");
+                    node = document.createTextNode(addr + "@" + postfixList[i]);
+                    li.appendChild(node);
+                    list.push(li);
+                }
+            }
+
+            if (list == "") {
+                for (var i = 0; i < postfixList.length; i++) {
+                    li = document.createElement("li");
+                    node = document.createTextNode(addr + "@" + postfixList[i]);
+                    li.appendChild(node);
+                    list.push(li);
+                }
+            }
+        
+            list[nowSelectTipIndex].className = "select";
+            return list;
+        }
+
+        function append() {
+            var liAll = document.querySelectorAll("li");
+            var li = create();
+
+            for (var i = 0; i < liAll.length; i++) {
+                liAll[i].remove();
+            }
+            
+            for (var i = 0; i < li.length; i++) {
+                ul.appendChild(li[i]);
+            }
+        }
+
+        function controlSug() {
+            var content = getInput();
+
+            if (content == "") {
+                hide();
+            } else {
+                show();
+            }
+        }
+
+        function hide() {
+            ul.style.display = "none";
+        }
+
+        function show() {
+            ul.style.display = "block";
+        }
+
+        function encode(html) {
+            var temp = document.createElement ("div");
+
+            if (temp.textContent != undefined) {
+                temp.textContent = html;
+            }else {
+                temp.innerText = html;
+            }
+
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        }
+
+        function decode(text) {
+            var temp = document.createElement ("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+
+        function removeSelect() {
+            nowSelectTipIndex = 0;
+        }
+
+        function onKey(e) {
+            var li = document.querySelectorAll("li");
+
+            if (ul.style.display == "block") {
+
+                if (e.keyCode == 38) {
+                    e.preventDefault();
+
+                    if (nowSelectTipIndex == 0) {
+                        li[nowSelectTipIndex].className = "";
+                        nowSelectTipIndex = li.length - 1;
+                        li[nowSelectTipIndex].className = "select";
+                    }else {
+                        li[nowSelectTipIndex].className = "";
+                        nowSelectTipIndex = nowSelectTipIndex - 1;
+                        li[nowSelectTipIndex].className = "select";
+                    }
+                }
+
+                if (e.keyCode == 40) {
+
+                    if (nowSelectTipIndex == li.length - 1) {
+                        li[nowSelectTipIndex].className = "";
+                        nowSelectTipIndex = 0;
+                        li[nowSelectTipIndex].className = "select";
+                    }else {
+                        li[nowSelectTipIndex].className = "";
+                        nowSelectTipIndex = nowSelectTipIndex + 1;
+                        li[nowSelectTipIndex].className = "select";
+                    }
+                }
+
+                if (e.keyCode == 13) {
+                    input.value = decode(li[nowSelectTipIndex].innerHTML);
+                    hide();
+                }
+
+                if (e.keyCode == 27) {
+                    input.select();
+                }
+            }
+
+        }
+
+        input.focus();
+    </script>
+</body>
+</html>
