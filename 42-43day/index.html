@@ -1,0 +1,191 @@
+<script>
+    /* 
+    Es5
+
+    //餐厅类
+    function Restaurant(obj) {
+        for (const key in obj) {
+            if (key === "cash") {
+                this.cash = obj[key];
+            }else if (key === "seats") {
+                this.seats = obj[key];
+            }else if (key === "staff") {
+                this.staff = obj[key];
+            }
+        }
+    }
+
+    Restaurant.prototype.hire = function (info) {
+        this.staff.push(info);
+        
+    }
+
+    Restaurant.prototype.fire = function (info) {
+        var index = this.staff.indexOf(info);
+        
+        if (index != -1) {
+            this.staff.splice(index,1);
+        }
+    }
+
+    //职员类
+    function Staff(name,wage) {
+        this.name = name;
+        this.wage = wage;
+    }
+
+    Staff.prototype.work = function () {
+        console.log("完成一次工作");
+    }
+
+    //服务员类，继承自职员
+    function Waiter(name,wage) {
+        Staff.call(this,name,wage);
+    }
+
+   Waiter.prototype.work = function (params) {
+       if (params instanceof array) {
+           console.log("记录点菜");
+       }else {
+           console.log("上菜");
+           
+       }
+   }
+
+    //厨师类，继承自职员
+    function Cook(name,wage) {
+        Staff.call(this,name,wage);
+    }
+
+    Cook.prototype.cooking = function (menu) {
+        for (const key in menu) {
+            if (menu[key] === "name") {
+                console.log(menu[key]);
+            }
+        }
+    }
+
+    //顾客类
+    function Customer() {}
+
+    Customer.prototype.order = function (params) {
+        console.log("点餐");
+    }
+
+    Customer.prototype.eat = function (params) {
+        console.log("吃");
+    }
+
+    //菜品类
+    function Menu(name,cost,price) {
+        this.name = name;
+        this.cost = cost;
+        this.price = price;
+    }
+    */
+
+    //餐厅类
+    class Restaurant {
+        constructor(obj) {
+            for (const key in obj) {
+                if (key === "cash") {
+                    this.cash = obj[key];
+                }else if (key === "seats") {
+                    this.seats = obj[key];
+                }else if (key === "staff") {
+                    this.staff = obj[key];
+                }
+            }
+        }
+
+        hire(info) {
+            this.staff.push(info);
+        }
+
+        fire(info) {
+            var index = this.staff.indexOf(info);
+        
+            if (index != -1) {
+                this.staff.splice(index,1);
+            }
+        }
+    }
+
+    //职员类
+    class Staff {
+        constructor(name, wage) {
+            this.name = name;
+            this.wage = wage;
+        }
+
+        work() {
+            console.log("完成一次工作");
+        }
+    }
+
+    //服务员类，继承自职员
+    class Waiter extends Staff {
+        constructor(name, wage) {
+            super(name, wage);
+        }
+
+        work(params) {
+            if (params instanceof array) {
+                console.log("记录点菜");
+            }else {
+                console.log("上菜");
+                
+            }
+        }
+    }
+
+    //厨师类，继承自职员
+    class Cook extends Staff {
+        constructor(name, wage) {
+            super(name, wage);
+        }
+
+        cooking(menu) {
+            for (const key in menu) {
+                if (menu[key] === "name") {
+                    console.log(menu[key]);
+                }
+            }
+        }
+    }
+
+    //顾客类
+    class Customer {
+        order(params) {
+            console.log("点餐");
+        }
+
+        eat(params) {
+            console.log("吃");
+        }
+    }
+
+    //菜品类
+    class Menu {
+        constructor(name, cost, price) {
+            this.name = name;
+            this.cost = cost;
+            this.price = price;
+        }
+    }
+
+    //测试代码
+    var ifeRestaurant = new Restaurant({
+        cash: 1000000,
+        seats: 20,
+        staff: []
+    });
+
+    var newCook = new Cook("Tony", 10000);
+    ifeRestaurant.hire(newCook);
+
+    console.log(ifeRestaurant.staff);
+    
+    ifeRestaurant.fire(newCook);
+    console.log(ifeRestaurant.staff);
+</script>
