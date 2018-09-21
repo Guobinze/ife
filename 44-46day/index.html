@@ -1,0 +1,165 @@
+<script>
+    //餐厅类
+    function Restaurant(obj) {
+        for (const key in obj) {
+            if (key === "cash") {
+                this.cash = obj[key];
+            }else if (key === "seats") {
+                this.seats = obj[key];
+            }else if (key === "staff") {
+                this.staff = obj[key];
+            }
+        }
+    }
+
+    Restaurant.prototype.hire = function (info) {
+        this.staff.push(info);
+        
+    }
+
+    Restaurant.prototype.fire = function (info) {
+        var index = this.staff.indexOf(info);
+        
+        if (index != -1) {
+            this.staff.splice(index,1);
+        }
+    }
+
+    //职员类
+    var id = 0;
+
+    function Staff(name,wage) {
+        id += 1;
+        this.id = id;
+        this.name = name;
+        this.wage = wage;
+    }
+
+    Staff.prototype.work = function () {
+        console.log("完成一次工作");
+    }
+
+    //使用单例模式创建服务员
+    var waiter = (function () {
+        var instance;
+
+        function WaiterSingleton(name, wage) {
+            Staff.call(this, name, wage);
+            console.log("服务员" + this.name + "已创建");
+        };
+
+        WaiterSingleton.prototype.work = function (args) {
+            //如果参数不为空，则记录点菜并让厨师开始做菜；如果为空则说明厨师做好了菜需要上菜
+            if (args) {
+                console.log("记录点菜");
+                
+                cook.getInstance().cooking(args);
+            }else {
+                console.log("上菜");
+            }
+        }
+
+        return {
+            getInstance: function (name, wage) {
+                if (!instance) {
+                    instance = new WaiterSingleton(name, wage);
+                }
+
+                return instance;
+            }
+        };
+    })();
+
+    //使用单例模式创建厨师
+    var cook = (function () {
+        var instance;
+
+        function CookSingleton(name, wage) {
+            Staff.call(this, name, wage)
+
+            console.log("厨师" + this.name + "已创建");
+        };
+
+        CookSingleton.prototype.cooking = function (menu) {
+
+            for (var key in menu) {
+                if (key === "name") {
+                    console.log("开始做 " + menu[key]);
+                }
+            }
+
+            waiter.getInstance().work();
+        }
+
+        return {
+            getInstance: function (name, wage) {
+                if (!instance) {
+                    instance = new CookSingleton(name, wage);
+                }
+
+                return instance;
+            }
+        };
+    })();
+
+    //顾客类
+    function Customer() {}
+
+    Customer.prototype.order = function (menu) {
+        var random = menu[Math.floor(Math.random() * menu.length)];
+            
+        console.log("点餐 " + random.name);
+        
+        waiter.getInstance().work(random);
+    }
+
+    Customer.prototype.eat = function () {
+        console.log("吃");
+        console.log("离开");
+    }
+
+    //菜品类
+    function Menu(name,price,cost) {
+        this.name = name;
+        this.price = price;
+        this.cost = cost;
+    }
+
+    //测试代码
+    //创建餐厅
+    var restaurant = new Restaurant({
+        cash: 10000,
+        seats: 1,
+        staff: []
+    });
+
+    //创建菜单
+    var menuList = [];
+    menuList.push(new Menu("土豆丝",15,5));
+    menuList.push(new Menu("干豆腐丝",10,3));
+    menuList.push(new Menu("麻辣鸡丝",20,8));
+    menuList.push(new Menu("鱿鱼丝",25,10));
+    
+    //雇佣一个服务员
+    var newWaiter = waiter.getInstance("张三", 3000);
+    restaurant.hire(newWaiter);
+
+    //雇佣一个厨师
+    var newCook = cook.getInstance("李四", 5000);
+    restaurant.hire(newCook);
+
+    //创建顾客列表
+    var customerList = [];
+    var c1 = new Customer();
+    var c2 = new Customer();
+    customerList.push(c1);
+    customerList.push(c2);
+
+    //遍历顾客列表并开始服务
+    for (var i = 0; i < customerList.length; i++) {
+        console.log("有顾客进来啦");
+        
+        customerList[i].order(menuList);
+        customerList[i].eat();
+    }
+</script>
