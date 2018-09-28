@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可视化餐厅</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #restaurant-wrap {
+            position: relative;
+            margin-top: 5%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        #restaurant-wrap div {
+            height: 100%;
+        }
+
+        #cook-wrap {
+            float: left;
+            width: 30%;
+            text-align: center;
+            border-right: 1px solid black;
+        }
+
+        #status {
+            margin-top: 5%;
+        }
+
+        #hall {
+            display: inline-block;
+            position: relative;
+            width: 70%;
+        }
+
+        #cash {
+            margin-left: auto;
+            margin-right: auto;
+            width: 15%;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        #customer-box {
+            position: absolute;
+            top: 300px;
+            right: 150px;
+            width: 150px;
+        }
+
+        #cook {
+            margin-top: 20%;
+            width: 100px;
+        }
+
+        #checkout-counter {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            width: 150px;
+        }
+
+        #waiter {
+            position: absolute;
+            top: 45px;
+            right: 150px;
+            width: 100px;
+        }
+
+        #table {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%);
+            width: 150px;
+        }
+
+        #customer {
+            position: relative;
+            margin-left: 40%;
+            height: 100px;
+        }
+
+        button {
+            position: absolute;
+            top: 30px;
+            width: 50px;
+            height: 30px;
+            background-color: transparent;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #customer img {
+            position: relative;
+            top: 0px;
+            left: 60px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div id="restaurant-wrap">
+        <div id="cook-wrap">
+            <img src="img/cook.jpg" alt="厨师" id="cook" />
+            <div id="status"></div>
+        </div>
+        <div id="hall">
+            <p id="cash"></p>
+            <img src="img/checkout-counter.png" alt="收银台" id="checkout-counter" />
+            <img src="img/table.png" alt="桌子" id="table" />
+            <img src="img/waiter.png" alt="服务员" id="waiter" />
+            <div id="customer-box"></div>
+        </div>
+    </div>
+    <div id="customer">
+        <button>进店</button>
+        <img src="img/customer01.jpg" alt="顾客" />
+        <img src="img/customer02.jpg" alt="顾客" />
+        <img src="img/customer03.jpg" alt="顾客" />
+        <img src="img/customer04.jpg" alt="顾客" />
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
