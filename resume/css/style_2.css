@@ -1,39 +1,40 @@
+html, body {
+    height: 100%;
+}
+
 body {
-    display: flex;
+    margin: 0;
+    overflow: hidden;
 }
 
 header {
-    flex: 1;
-    background-color: #3f8ef9;
+    float: left;
+    width: 20%;
+    height: 100%;
+    background-color: #74a5f4;
 }
 
 h1 {
     margin-top: 20%;
-    font-size: 2.5em;
     color: white;
     text-align: center;
 }
 
 main {
-    flex: 5;
+    margin-left: 20%;
+    padding-top: 1%;
     padding-left: 2%;
-    background-color: white;
 }
 
-div {
-    overflow: hidden;
+.inline > h2 {
+    display: block;
 }
 
-.float h3 {
-    float: left;
+.inline > * {
+    display: inline;
 }
 
-.float p {
-    float: left;
-    margin-left: 1%;
+.inline p,
+.inline a {
     margin-right: 3%;
-}
-
-h3 {
-    font-size: 1em;
 }
