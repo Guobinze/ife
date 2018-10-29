@@ -6,6 +6,7 @@ tableWrapper.onmouseover = function (e) {
 // 鼠标移出根据选项画多条折线图
 tableWrapper.onmouseout = function () {
     var data = getCheckData(localData());
+    
     lineChart.setData(data);
     lineChart.drawMany();
 }
@@ -40,70 +41,74 @@ var lineChart = {
     drawOne: function () {
         removeLineChart();
 
-        // 拿到折线图中的最大值Max
-        var data = this.data;
-        var max = 0;
+        if (this.data) {
+            // 拿到折线图中的最大值Max
+            var data = this.data;
+            var max = 0;
 
-        for (let i = 0; i < data.length; i++) {
-            if (max - data[i] < 0) {
-                max = data[i];
+            for (let i = 0; i < data.length; i++) {
+                if (max - data[i] < 0) {
+                    max = data[i];
+                }
             }
+
+            // 根据Max和Y轴高度，计算比例
+            var proportion = this.axisY / max;
+
+            // 画轴
+            lineChartAxis();
+
+            //画线
+            drawLine(data,proportion, "#60acfc");
         }
-
-        // 根据Max和Y轴高度，计算比例
-        var proportion = this.axisY / max;
-
-        // 画轴
-        lineChartAxis();
-
-        //画线
-        drawLine(data,proportion, "#60acfc");
     },
 
     // 画多条折线图
     drawMany: function () {
         removeLineChart();
 
-        // 拿到折线图中的最大值Max
-        var data = this.data;
-        var max = 0;
+        if (this.data) {
+            // 拿到折线图中的最大值Max
+            var data = this.data;
+            var max = 0;
 
-        for (const key in data) {
-            
-            for (let i = 0; i < data[key].sale.length; i++) {
+            for (const key in data) {
                 
-                if (max - data[key].sale[i] < 0) {
-                    max = data[key].sale[i];
-                } 
+                for (let i = 0; i < data[key].sale.length; i++) {
+                    
+                    if (max - data[key].sale[i] < 0) {
+                        max = data[key].sale[i];
+                    } 
+                }
             }
-        }
-        
-        // 根据Max和Y轴高度，计算比例
-        var proportion = this.axisY / max;
+            
+            // 根据Max和Y轴高度，计算比例
+            var proportion = this.axisY / max;
 
-        // 画轴
-        lineChartAxis();
+            // 画轴
+            lineChartAxis();
 
-        // 画线
-        var phoneColor = 0,
-            laptopColor = 0,
-            soundColor = 0;
+            // 画线
+            var phoneColor = 0,
+                laptopColor = 0,
+                soundColor = 0;
 
-        for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
 
-            if (data[i].product == "手机") {
-                drawLine(data[i].sale, proportion, this.color.phone[phoneColor]);
-                phoneColor ++;
-            }
+                if (data[i].product == "手机") {
+                    drawLine(data[i].sale, proportion, this.color.phone[phoneColor]);
+                    phoneColor ++;
+                }
 
-            if (data[i].product == "笔记本") {
-                drawLine(data[i].sale, proportion, this.color.laptop[laptopColor]);
-                laptopColor ++;
-            }
+                if (data[i].product == "笔记本") {
+                    drawLine(data[i].sale, proportion, this.color.laptop[laptopColor]);
+                    laptopColor ++;
+                }
 
-            if (data[i].product == "智能音箱") {
-                drawLine(data[i].sale, proportion, this.color.sound[soundColor]);
-                soundColor ++;
+                if (data[i].product == "智能音箱") {
+                    drawLine(data[i].sale, proportion, this.color.sound[soundColor]);
+                    soundColor ++;
+                }
             }
         }
     },
@@ -187,7 +192,7 @@ function drawLine(data, proportion, color) {
 
 // 删除折线图
 function removeLineChart() {
-    var canvas = document.querySelector("canvas");
+    var canvas = document.querySelector("#draw-wrapper > canvas");
 
     if (canvas) {
         canvas.remove();

@@ -2,6 +2,7 @@
 function createTable(data) {
     // 先检查是否已插入表格，是的话则删除，防止无限堆积
     removeTable();
+    removeButton();
 
     // 先检查数据是否为空，不为空时再插入表格
     if (data != undefined) {
@@ -121,6 +122,15 @@ function creatButton() {
         return document.createElement("button");
     }else {
         return document.createElement("button");
+    }
+}
+
+// 删除表格按钮
+function removeButton() {
+    var button = document.querySelector("#table-wrapper > button"); 
+
+    if (button) {
+        button.remove();
     }
 }
 

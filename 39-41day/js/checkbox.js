@@ -1,5 +1,6 @@
 var regionCheck = document.getElementById("region-radio-wrapper"),
     productCheck = document.getElementById("product-radio-wrapper");
+    tableWrapper = document.getElementById("table-wrapper");
 
 // 检查checkbox的点击状态
 function checkClick(e) {

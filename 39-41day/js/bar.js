@@ -70,7 +70,7 @@ var histogram = {
 
 // 删除柱状图
 function removeHistogram() {
-    var svg = document.querySelector("svg");
+    var svg = document.querySelector("#draw-wrapper > svg");
 
     if (svg) {
         svg.remove();

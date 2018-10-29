@@ -54,7 +54,6 @@
         var nowSelectTipIndex = 0;
         
         input.oninput = function(e) {
-
             if (e.keyCode != 38 || e.keyCode != 40 || e.keyCode != 13) {
                 removeSelect();
             }
@@ -100,13 +99,11 @@
             if (index != -1) {
                 addr = content.slice(0,index);
                 mail = content.slice(index+1);
-                
             }else {
                 addr = content;
             }
 
             for (var i = 0; i < postfixList.length; i++) {
-
                 if (postfixList[i].indexOf(mail) != -1 && postfixList[i].indexOf(mail) == 0 && mail != "") {
                     li = document.createElement("li");
                     node = document.createTextNode(addr + "@" + postfixList[i]);
@@ -169,7 +166,6 @@
             }
 
             var output = temp.innerHTML;
-            temp = null;
             return output;
         }
 
@@ -177,7 +173,6 @@
             var temp = document.createElement ("div");
             temp.innerHTML = text;
             var output = temp.innerText || temp.textContent;
-            temp = null;
             return output;
         }
 
@@ -199,7 +194,7 @@
                         li[nowSelectTipIndex].className = "select";
                     }else {
                         li[nowSelectTipIndex].className = "";
-                        nowSelectTipIndex = nowSelectTipIndex - 1;
+                        nowSelectTipIndex -=1;
                         li[nowSelectTipIndex].className = "select";
                     }
                 }
@@ -212,7 +207,7 @@
                         li[nowSelectTipIndex].className = "select";
                     }else {
                         li[nowSelectTipIndex].className = "";
-                        nowSelectTipIndex = nowSelectTipIndex + 1;
+                        nowSelectTipIndex += 1;
                         li[nowSelectTipIndex].className = "select";
                     }
                 }

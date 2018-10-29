@@ -1,5 +1,3 @@
-
-
 // 设置pushState
 function setHistory() {
     // 获取已点击的按钮
