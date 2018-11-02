@@ -102,8 +102,10 @@ var cook = (function () {
 function Customer() {}
 
 Customer.prototype.order = function (menu) {
+    //随机点餐
     var number = Math.floor(Math.random() * menu.length);
 
+    //防止随机点餐数为0
     while (number == 0) {
         number = Math.floor(Math.random() * menu.length);
     }
@@ -112,7 +114,7 @@ Customer.prototype.order = function (menu) {
 
     for (var i = 0; i < number; i++) {
         var random = Math.floor(Math.random() * menu.length);
-
+        //防止点餐重复
         if (menuRandom.indexOf(menu[random]) === -1) {
             menuRandom.push(menu[random]);
         }
@@ -188,21 +190,76 @@ var newCustomer;
 var index = 0;
 var menuIndex = 0;
 
-//定义做饭函数
+//定义服务函数
+function run() {
+    waiterMove(0.5, 180, 280);
+
+    var promise = new Promise(function (resolve, reject) {
+        if (index == customerList.length) {
+            return;
+        }
+
+        //顾客进店坐下
+        var customer = document.querySelector("#customer > img");
+        customer.style.position = "absolute";    
+        customer.style.top = "-200px";
+        customer.style.left = "130px";
+        customer.style.transition = "0.5s";
+
+        newCustomer = new Customer(customerList[index]);
+        index++;
+
+        console.log("有顾客来啦");
+
+        //顾客点餐
+        var customerWarp = document.getElementById("customer-box");
+        var menu = newCustomer.order(menuList);
+        var temp = 3;
+
+        var count = setInterval(function () {
+            customerWarp.innerHTML = "点菜中" + "&nbsp;" + "还有" + temp-- + "s点完";
+        },1000);
+
+        setTimeout(function () {
+            clearInterval(count);
+            customerWarp.innerHTML = "";
+
+            for (var i = 0; i < menu.length; i++) {
+                var p = document.createElement("p");
+                p.innerHTML = menu[i].name + "还未上";
+                customerWarp.appendChild(p);
+            }
+        }, 4000);
+
+        setTimeout(resolve, time * 3 * 1000, menu);
+    }).then (function (menu) {
+        //服务员记录点餐
+        newWaiter.work(menu);
+
+        //告诉厨师做菜
+        menuIndex = 0;
+        cooking(menu);
+    });
+}
+
+//定义做菜函数
 function cooking(menu) {
     new Promise (function (resolve, reject) {
         var time = menu[menuIndex].time;
 
+        //显示待做菜列表
         cookList(menu, menuIndex);
         newCook.work(menu[menuIndex]);
         menuIndex++;
 
         setTimeout(resolve, time * 1000, menuIndex);
     }).then (function (menuIndex) {
+        //告诉服务员上菜
         newWaiter.work();
         waiterMove(0.5, 180, 320);
         newCustomer.eat(menu[menuIndex - 1], menuIndex - 1);
 
+        //如果没上完菜继续回去等厨师出餐，如果都上完了等待顾客结账
         if (menuIndex < menu.length) {
             cooking(menu);
         }else {
@@ -227,7 +284,7 @@ function cooking(menu) {
 //在厨师图片下显示待做菜的列表
 function cookList(menu, index) {
     setTimeout(function () {
-        waiterMove(0.5, 70, 600);
+        waiterMove(0.5, 70, 580);
     }, 500);
     
     var time = menu[index].time;
@@ -267,54 +324,6 @@ function waiterMove(time, top, right) {
         waiter.style.top = top + "px";
         waiter.style.right = right + "px";
     }, time * 1000);
-}
-
-//定义服务函数
-function run() {
-    waiterMove(0.5, 180, 320);
-
-    var promise = new Promise(function (resolve, reject) {
-        if (index == customerList.length) {
-            return;
-        }
-
-        var customer = document.querySelector("#customer > img");
-        customer.style.position = "absolute";    
-        customer.style.top = "-200px";
-        customer.style.left = "150px";
-        customer.style.transition = "0.5s";
-
-        newCustomer = new Customer(customerList[index]);
-        index++;
-
-        console.log("有顾客来啦");
-
-        var customerWarp = document.getElementById("customer-box");
-        var menu = newCustomer.order(menuList);
-        var temp = 3;
-
-        var count = setInterval(function () {
-            customerWarp.innerHTML = "点菜中" + "&nbsp;" + "还有" + temp-- + "s点完";
-        },1000);
-
-        setTimeout(function () {
-            clearInterval(count);
-            customerWarp.innerHTML = "";
-
-            for (var i = 0; i < menu.length; i++) {
-                var p = document.createElement("p");
-                p.innerHTML = menu[i].name + "还未上";
-                customerWarp.appendChild(p);
-            }
-        }, 4000);
-
-        setTimeout(resolve, time * 3 * 1000, menu);
-    }).then (function (menu) {
-        newWaiter.work(menu);
-
-        menuIndex = 0;
-        cooking(menu);
-    });
 }
 
 //开始服务

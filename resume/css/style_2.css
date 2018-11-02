@@ -38,3 +38,12 @@ main {
 .inline a {
     margin-right: 3%;
 }
+
+#item {
+    padding: 0;
+}
+
+#item li {
+    margin-top: .5%;
+    margin-left: 2%;
+}
